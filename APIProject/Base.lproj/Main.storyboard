@@ -15,8 +15,38 @@
                     <view key="view" contentMode="scaleToFill" id="ZHe-L5-pmZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nkd-sd-xZs">
+                                <rect key="frame" x="76.666666666666686" y="200" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="N8o-tK-0ul"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="240" id="ZMt-Go-sQq"/>
+                                    <constraint firstAttribute="width" constant="240" id="rd5-Ta-nB0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQH-iG-jeY">
+                                <rect key="frame" x="174" y="448" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrP-MD-LJL">
+                                <rect key="frame" x="64" y="670" width="265" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Fish"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WvG-FY-zkb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cQH-iG-jeY" firstAttribute="top" secondItem="Nkd-sd-xZs" secondAttribute="bottom" constant="8" id="0nM-ds-v0s"/>
+                            <constraint firstItem="WvG-FY-zkb" firstAttribute="trailing" secondItem="PrP-MD-LJL" secondAttribute="trailing" constant="64" id="1sE-nl-PHX"/>
+                            <constraint firstItem="PrP-MD-LJL" firstAttribute="leading" secondItem="WvG-FY-zkb" secondAttribute="leading" constant="64" id="6ha-3A-qQ2"/>
+                            <constraint firstItem="cQH-iG-jeY" firstAttribute="centerX" secondItem="ZHe-L5-pmZ" secondAttribute="centerX" id="QyK-bh-s9J"/>
+                            <constraint firstItem="WvG-FY-zkb" firstAttribute="bottom" secondItem="PrP-MD-LJL" secondAttribute="bottom" constant="64" id="U9D-07-vDg"/>
+                            <constraint firstItem="Nkd-sd-xZs" firstAttribute="top" secondItem="ZHe-L5-pmZ" secondAttribute="top" constant="200" id="fDZ-cJ-x46"/>
+                            <constraint firstItem="Nkd-sd-xZs" firstAttribute="centerX" secondItem="ZHe-L5-pmZ" secondAttribute="centerX" id="po4-xE-vCQ"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Fish" image="fish" catalog="system" selectedImage="fish.fill" id="fOK-QT-yFp"/>
                 </viewController>

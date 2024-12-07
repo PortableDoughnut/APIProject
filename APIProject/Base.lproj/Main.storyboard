@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 1-->
+        <!--Fish-->
         <scene sceneID="g9Q-SA-0pa">
             <objects>
                 <viewController id="94t-xU-tj0" customClass="DogViewController" customModule="APIProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="WvG-FY-zkb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="fOK-QT-yFp"/>
+                    <tabBarItem key="tabBarItem" title="Fish" image="fish" catalog="system" selectedImage="fish.fill" id="fOK-QT-yFp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3Z-ih-VN4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -103,6 +103,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fish" catalog="system" width="128" height="100"/>
+        <image name="fish.fill" catalog="system" width="128" height="99"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

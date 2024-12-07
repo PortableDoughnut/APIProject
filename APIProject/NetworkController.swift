@@ -11,6 +11,7 @@ import Foundation
 enum NetworkControllerError: Error, LocalizedError{
 	case invalidURL
 	case responseSetupError
+	case invalidResponse
 }
 
 extension NetworkControllerError: CustomStringConvertible{
@@ -20,12 +21,14 @@ extension NetworkControllerError: CustomStringConvertible{
 				"Invalid URL"
 			case .responseSetupError:
 				"Could not setup HTTP response"
+			case .invalidResponse:
+				"Invalid newwork connection"
 		}
 	}
 }
 
 class NetworkController {
-	func fetchFIsh() async throws -> [Fish]?{
+	func fetchFish() async throws -> [Fish]?{
 		var toReturn: [Fish]?
 		
 		var fishURLComponents: URLComponents = .init()
@@ -43,7 +46,10 @@ class NetworkController {
 				var (data, response) = try await URLSession.shared.data(for: request)
 				
 				guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse
-				else { throw NetworkControllerError.invalidURL }
+				else { throw NetworkControllerError.responseSetupError }
+				
+				guard httpResponse.statusCode == 200
+				else { throw NetworkControllerError.invalidResponse }
 				
 				toReturn = try JSONDecoder().decode([Fish].self, from: data)
 			} catch {

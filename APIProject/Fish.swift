@@ -15,3 +15,5 @@ struct Fish: Codable {
 		case image = "image_url"
 	}
 }
+
+extension Fish: CustomStringConvertible { var description: String { name } }

@@ -34,14 +34,13 @@ class NetworkController {
 		var fishURLComponents: URLComponents = .init()
 		fishURLComponents.scheme = "https"
 		fishURLComponents.host = "api.nookipedia.com"
-		fishURLComponents.path = "/api/v1/fish"
+		fishURLComponents.path += "/nh/fish"
 		
 		guard let url = fishURLComponents.url else { throw NetworkControllerError.invalidURL }
 		
 		var request: URLRequest = .init(url: url)
 		request.addValue(API_KEY, forHTTPHeaderField: "X-API-KEY")
 		
-		Task {
 			do {
 				var (data, response) = try await URLSession.shared.data(for: request)
 				
@@ -49,14 +48,15 @@ class NetworkController {
 				else { throw NetworkControllerError.responseSetupError }
 				
 				guard httpResponse.statusCode == 200
-				else { throw NetworkControllerError.invalidResponse }
+				else {
+					print("Status Code: \(httpResponse.statusCode)")
+					throw NetworkControllerError.invalidResponse
+				}
 				
 				toReturn = try JSONDecoder().decode([Fish].self, from: data)
 			} catch {
 				print("Error: \(error)")
 			}
-		}
-		
 		return toReturn
 	}
 }

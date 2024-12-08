@@ -11,7 +11,7 @@
         <!--Fish-->
         <scene sceneID="g9Q-SA-0pa">
             <objects>
-                <viewController id="94t-xU-tj0" customClass="DogViewController" customModule="APIProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="94t-xU-tj0" customClass="FishViewController" customModule="APIProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZHe-L5-pmZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,8 +24,8 @@
                                     <constraint firstAttribute="width" constant="240" id="rd5-Ta-nB0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQH-iG-jeY">
-                                <rect key="frame" x="174" y="448" width="45" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQH-iG-jeY">
+                                <rect key="frame" x="196.66666666666666" y="448" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,7 +34,13 @@
                                 <rect key="frame" x="64" y="670" width="265" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="New Fish"/>
+                                <connections>
+                                    <action selector="newFishButtonPressed:" destination="94t-xU-tj0" eventType="touchUpInside" id="zvo-ie-aDk"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Knc-pa-H7d">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WvG-FY-zkb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -45,10 +51,18 @@
                             <constraint firstItem="cQH-iG-jeY" firstAttribute="centerX" secondItem="ZHe-L5-pmZ" secondAttribute="centerX" id="QyK-bh-s9J"/>
                             <constraint firstItem="WvG-FY-zkb" firstAttribute="bottom" secondItem="PrP-MD-LJL" secondAttribute="bottom" constant="64" id="U9D-07-vDg"/>
                             <constraint firstItem="Nkd-sd-xZs" firstAttribute="top" secondItem="ZHe-L5-pmZ" secondAttribute="top" constant="200" id="fDZ-cJ-x46"/>
+                            <constraint firstItem="Knc-pa-H7d" firstAttribute="centerY" secondItem="ZHe-L5-pmZ" secondAttribute="centerY" id="gVh-Ze-aZS"/>
+                            <constraint firstItem="Knc-pa-H7d" firstAttribute="centerX" secondItem="ZHe-L5-pmZ" secondAttribute="centerX" id="h4S-Cg-9xp"/>
                             <constraint firstItem="Nkd-sd-xZs" firstAttribute="centerX" secondItem="ZHe-L5-pmZ" secondAttribute="centerX" id="po4-xE-vCQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Fish" image="fish" catalog="system" selectedImage="fish.fill" id="fOK-QT-yFp"/>
+                    <connections>
+                        <outlet property="activityIndicatior" destination="Knc-pa-H7d" id="H0u-hZ-hue"/>
+                        <outlet property="imageView" destination="Nkd-sd-xZs" id="Fmv-ip-hNa"/>
+                        <outlet property="nameLabel" destination="cQH-iG-jeY" id="m0f-nR-5LD"/>
+                        <outlet property="newFishButton" destination="PrP-MD-LJL" id="oNr-w1-NgG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3Z-ih-VN4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

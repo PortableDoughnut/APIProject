@@ -38,3 +38,16 @@ extension FishViewController: LoadingDelegate {
 	
 	
 }
+
+extension RepresentativeTableViewController: LoadingDelegate {
+	func startLoading() {
+		activityIndicator.isHidden = false
+		activityIndicator.startAnimating()
+	}
+	
+	func stopLoading() {
+		activityIndicator.stopAnimating()
+	}
+	
+	
+}

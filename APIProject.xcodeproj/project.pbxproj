@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6347C9202D0520AB005B8599 /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6347C91F2D0520AB005B8599 /* XMLCoder */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6369C5932D04DE58004CAB43 /* APIProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APIProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6347C9202D0520AB005B8599 /* XMLCoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = APIProject;
 			packageProductDependencies = (
+				6347C91F2D0520AB005B8599 /* XMLCoder */,
 			);
 			productName = APIProject;
 			productReference = 6369C5932D04DE58004CAB43 /* APIProject.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 6369C58A2D04DE57004CAB43;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6347C91E2D0520AB005B8599 /* XCRemoteSwiftPackageReference "XMLCoder" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6369C5942D04DE58004CAB43 /* Products */;
 			projectDirPath = "";
@@ -333,6 +342,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6347C91E2D0520AB005B8599 /* XCRemoteSwiftPackageReference "XMLCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MaxDesiatov/XMLCoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6347C91F2D0520AB005B8599 /* XMLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6347C91E2D0520AB005B8599 /* XCRemoteSwiftPackageReference "XMLCoder" */;
+			productName = XMLCoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6369C58B2D04DE57004CAB43 /* Project object */;
 }

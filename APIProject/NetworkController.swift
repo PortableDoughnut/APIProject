@@ -22,7 +22,7 @@ extension NetworkControllerError: CustomStringConvertible{
 			case .responseSetupError:
 				"Could not setup HTTP response"
 			case .invalidResponse:
-				"Invalid newwork connection"
+				"Invalid network connection"
 		}
 	}
 }
@@ -39,10 +39,10 @@ class NetworkController {
 		guard let url = fishURLComponents.url else { throw NetworkControllerError.invalidURL }
 		
 		var request: URLRequest = .init(url: url)
-		request.addValue(API_KEY, forHTTPHeaderField: "X-API-KEY")
+		request.addValue(AC_API_KEY, forHTTPHeaderField: "X-API-KEY")
 		
 			do {
-				var (data, response) = try await URLSession.shared.data(for: request)
+				let (data, response) = try await URLSession.shared.data(for: request)
 				
 				guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse
 				else { throw NetworkControllerError.responseSetupError }
@@ -57,6 +57,38 @@ class NetworkController {
 			} catch {
 				print("Error: \(error)")
 			}
+		return toReturn
+	}
+	
+	func fetchRepresentative(state stateCode: String) async throws -> [Member]? {
+		var toReturn: [Member]?
+		
+		guard let url: URL = .init(
+			string: "https://api.congress.gov/v3/member/\(stateCode)?currentMember=true&api_key=\(US_API_KEY)"
+		) else { throw NetworkControllerError.invalidURL }
+	
+		
+		var request: URLRequest = .init(url: url)
+		request.addValue(US_API_KEY, forHTTPHeaderField: "api_key")
+		do {
+			let (data, response) = try await URLSession.shared.data(for: request)
+			
+			guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse
+			else { throw NetworkControllerError.responseSetupError }
+			
+			guard httpResponse.statusCode == 200
+			else {
+				print("Status Code: \(httpResponse.statusCode)")
+				throw NetworkControllerError.invalidResponse
+			}
+			
+			let representatives = try JSONDecoder().decode(Representative.self, from: data)
+			
+			toReturn = representatives.members
+		} catch {
+			print("Error: \(error)")
+		}
+		
 		return toReturn
 	}
 }

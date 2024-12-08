@@ -23,12 +23,12 @@ class FishViewController: UIViewController {
 		setFishes()
     }
 	
+	@MainActor
 	func setFishes() {
 		Task {
 			do {
 				loadingDelegate?.startLoading()
 				fishes = try await networkController.fetchFish()
-				fishes?.forEach { print($0) }
 				setup()
 			} catch {
 				print("Error: \(error)")

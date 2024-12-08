@@ -60,11 +60,11 @@ class NetworkController {
 		return toReturn
 	}
 	
-	func fetchRepresentative(state stateCode: String) async throws -> [Member]? {
+	func fetchRepresentative(state stateCode: String, district: Int) async throws -> [Member]? {
 		var toReturn: [Member]?
 		
 		guard let url: URL = .init(
-			string: "https://api.congress.gov/v3/member/\(stateCode)?currentMember=true&api_key=\(US_API_KEY)"
+			string: "https://api.congress.gov/v3/member/\(stateCode)/\(district)?currentMember=true&api_key=\(US_API_KEY)"
 		) else { throw NetworkControllerError.invalidURL }
 	
 		

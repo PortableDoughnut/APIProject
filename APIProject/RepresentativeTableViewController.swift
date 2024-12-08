@@ -12,7 +12,6 @@ class RepresentativeTableViewController: UITableViewController {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	var loadingDelegate: LoadingDelegate?
-	var senate: [Member] = []
 	var houseOfRepresentatives: [Member] = []
 	
 	let networkController: NetworkController = .init()
@@ -37,14 +36,7 @@ class RepresentativeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		switch section {
-			case 0:
-				return senate.count
-			case 1:
-				return houseOfRepresentatives.count
-			default:
-				return 0
-		}
+		houseOfRepresentatives.count
     }
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,32 +45,19 @@ class RepresentativeTableViewController: UITableViewController {
 				as? RepresentativeTableViewCell
 		else { return UITableViewCell() }
 		
-		let currentRepresentative =
-		indexPath.section == 0 ? senate[indexPath.row] : houseOfRepresentatives[indexPath.row]
-		
+		let currentRepresentative = houseOfRepresentatives[indexPath.row]
 		cell.configure(with: currentRepresentative)
 
         return cell
     }
 	
-	func loadRepresentatives(state: String = "UT") {
+	func loadRepresentatives(state: String = "UT", district: Int = 4) {
 		Task {
 			do {
 				loadingDelegate?.startLoading()
-				let representatives = try await networkController.fetchRepresentative(state: state)
+				let representatives = try await networkController.fetchRepresentative(state: state, district: district)
 				
-				if let representatives = representatives {
-					for representative in representatives {
-						switch representative.terms.item.first?.chamber {
-							case "House of Representatives":
-								houseOfRepresentatives.append(representative)
-							case "Senate":
-								senate.append(representative)
-							default:
-								break
-						}
-					}
-				}
+				houseOfRepresentatives += representatives!
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 					self.loadingDelegate?.stopLoading()

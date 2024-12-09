@@ -12,6 +12,7 @@ enum NetworkControllerError: Error, LocalizedError{
 	case invalidURL
 	case responseSetupError
 	case invalidResponse
+	case decodingError
 }
 
 extension NetworkControllerError: CustomStringConvertible{
@@ -23,6 +24,8 @@ extension NetworkControllerError: CustomStringConvertible{
 				"Could not setup HTTP response"
 			case .invalidResponse:
 				"Invalid network connection"
+			case .decodingError:
+				"Decoding Error"
 		}
 	}
 }
@@ -60,16 +63,15 @@ class NetworkController {
 		return toReturn
 	}
 	
-	func fetchRepresentative(state stateCode: String, district: Int) async throws -> [Member]? {
-		var toReturn: [Member]?
+	func fetchRepresentative(zipCode: String) async throws -> [Representative]? {
+		var toReturn: [Representative]?
 		
 		guard let url: URL = .init(
-			string: "https://api.congress.gov/v3/member/\(stateCode)/\(district)?currentMember=true&api_key=\(US_API_KEY)"
+			string: "https://whoismyrepresentative.com/getall_mems.php?zip=\(zipCode)&output=json"
 		) else { throw NetworkControllerError.invalidURL }
 	
 		
 		var request: URLRequest = .init(url: url)
-		request.addValue(US_API_KEY, forHTTPHeaderField: "api_key")
 		do {
 			let (data, response) = try await URLSession.shared.data(for: request)
 			
@@ -82,9 +84,9 @@ class NetworkController {
 				throw NetworkControllerError.invalidResponse
 			}
 			
-			let representatives = try JSONDecoder().decode(Representative.self, from: data)
+			let representatives = try JSONDecoder().decode(RepresentativeResponse.self, from: data)
 			
-			toReturn = representatives.members
+			toReturn = representatives.results
 		} catch {
 			print("Error: \(error)")
 		}

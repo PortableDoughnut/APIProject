@@ -10,8 +10,10 @@ import UIKit
 class RepresentativeTableViewCell: UITableViewCell {
 	@IBOutlet weak var partyLabel: UILabel!
 	@IBOutlet weak var stateLabel: UILabel!
+	@IBOutlet weak var internetButton: UIButton!
 	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var portraitImageView: UIImageView!
+	
+	var linkString: String?
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,11 +26,15 @@ class RepresentativeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 	
-	func configure(with representative: Member) {
-		portraitImageView.image = representative.depiction.imageUrl.asImage ??
-		UIImage(systemName: "exclamationmark.triangle.fill")
+	func configure(with representative: Representative) {
 		nameLabel.text = representative.name
-		partyLabel.text = representative.partyName
+		partyLabel.text = representative.party
 		stateLabel.text = representative.state
+		linkString = representative.link
+	}
+	
+	@IBAction func internetButtonPressed(_ sender: UIButton) {
+		guard let url: URL = .init(string: linkString!) else { return }
+		UIApplication.shared.open(url)
 	}
 }

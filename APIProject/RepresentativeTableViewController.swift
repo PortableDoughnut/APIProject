@@ -12,7 +12,7 @@ class RepresentativeTableViewController: UITableViewController {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	var loadingDelegate: LoadingDelegate?
-	var houseOfRepresentatives: [Member] = []
+	var houseOfRepresentatives: [Representative] = []
 	
 	let networkController: NetworkController = .init()
 	
@@ -25,6 +25,7 @@ class RepresentativeTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 		
+		searchBar.delegate = self
 		loadingDelegate = self
 		loadRepresentatives()
     }
@@ -51,13 +52,13 @@ class RepresentativeTableViewController: UITableViewController {
         return cell
     }
 	
-	func loadRepresentatives(state: String = "UT", district: Int = 4) {
+	func loadRepresentatives(zipCode: String = "84096") {
 		Task {
 			do {
 				loadingDelegate?.startLoading()
-				let representatives = try await networkController.fetchRepresentative(state: state, district: district)
+				let representatives = try await networkController.fetchRepresentative(zipCode: zipCode)
 				
-				houseOfRepresentatives += representatives!
+				houseOfRepresentatives = representatives!
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 					self.loadingDelegate?.stopLoading()
@@ -67,5 +68,16 @@ class RepresentativeTableViewController: UITableViewController {
 				loadingDelegate?.stopLoading()
 			}
 		}
+	}
+	
+	
+}
+
+extension RepresentativeTableViewController: UISearchBarDelegate {
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		guard searchText.count == 5,
+			  Int(searchText) != nil
+		else { return }
+		loadRepresentatives(zipCode: searchBar.text!)
 	}
 }

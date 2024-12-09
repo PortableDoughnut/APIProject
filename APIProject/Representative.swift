@@ -7,27 +7,16 @@
 
 import UIKit
 
+struct RepresentativeResponse: Codable {
+	let results: [Representative]
+}
+
 struct Representative: Codable {
-  var members: [Member]
-}
-
-struct Member: Codable {
-  var depiction: Depiction
-  var name: String
-  var partyName: String
-  var state: String
-  var terms: Terms
-}
-
-struct Depiction: Codable {
-  var imageUrl: URL
-}
-
-struct Terms: Codable {
-  var item: [TermItem]
-}
-
-struct TermItem: Codable {
-  var chamber: String
-  var startYear: Int
+	let name: String
+	let party: String
+	let state: String
+	let district: String
+	let phone: String
+	let office: String
+	let link: String
 }
